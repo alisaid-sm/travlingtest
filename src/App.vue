@@ -1,32 +1,58 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  display: flex;
+  justify-content: center;
 }
-
-#nav {
-  padding: 30px;
+.app-container {
+    width: 411px;
+    background: #FFFFFF;
+    /* border: 1px solid black; */
+    padding: 10px;
+    position: relative;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.form-control {
+    background-color: #c4c4c4 !important;
+    border: none !important;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.bg-form-default {
+    background-color: #c4c4c4 !important;
+}
+.clr-star-default {
+    color: #E0E0D9;
+}
+.clr-star-gold {
+    color: #E9E22F;
+}
+.form-control:focus, .form-control:active {
+    border: none !important;
+    box-shadow: none !important;
+}
+input[type="file"] {
+    display: none;
+}
+.app-btn {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+a {
+    text-decoration: none !important;
+    color: black !important;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block !important;
 }
 </style>
