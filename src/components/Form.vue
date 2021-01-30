@@ -32,9 +32,9 @@
                             <label for="file-upload" class="app-btn bg-form-default mr-auto">
                                 Upload Gambar
                             </label>
-                            {{ formAdd.images.length == 1? formAdd.images[0].name : `${formAdd.images.length} files selected`}}
                             <input @change="prosesFile" ref="fileAddReview" id="file-upload" type="file" multiple/>
                             <button type="submit" class="app-btn bg-form-default btn-right">Kirim</button>
+                            <p>{{ formAdd.images.length == 1? formAdd.images[0].name : `${formAdd.images.length} files selected`}}</p>
                         </div>
                     </form>
                 </div>

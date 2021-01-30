@@ -142,12 +142,24 @@ export default {
 
 <style>
 #edit-box {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 415px) {
+  #edit-box {
+    position: fixed;
+  }
+  .form-edit {
+    position: relative;
+    background: white;
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+}
 }
 .edit-container {
     display: flex;
@@ -157,9 +169,9 @@ export default {
 .form-edit {
     position: relative;
     background: white;
-    width: 70%;
+    width: 411px;
     padding: 10px;
-    margin-top: 30%;
+    margin-top: 5%;
 }
 .form-edit .close-icon {
     position: absolute;

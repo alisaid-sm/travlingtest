@@ -19,6 +19,11 @@
     padding: 10px;
     position: relative;
 }
+@media (max-width: 415px) {
+    .app-container {
+        width: 100%;
+    }
+}
 .form-control {
     background-color: #c4c4c4 !important;
     border: none !important;
