@@ -1,25 +1,18 @@
-# travlinpretestdev
+# Travling Test
 
-## Project setup
-```
-npm install
-```
+## Teknologi
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- [Visual_Studio_Code](https://code.visualstudio.com/)
+- [VueJs](https://vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Axios](https://www.npmjs.com/package/axios)
 
-### Compiles and minifies for production
+## Setup
 ```
-npm run build
+~$ git clone https://github.com/alisaid-sm/travlingtest.git
+~$ cd travlingtest
+~$ npm install
+~$ npm run serve
 ```
+## Demo
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# travlingtest

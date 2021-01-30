@@ -100,31 +100,35 @@ export default {
       this.ustarfix = this.detailReview.data.review_star
     },
     updateReview (form) {
-      const submit = {
-        id: this.detailReview.data._id,
-        data: new FormData()
-      }
-      submit.data.append('name', this.formUpdate.name)
-      submit.data.append('review_comment', this.formUpdate.review_comment)
-      submit.data.append('review_star', this.formUpdate.review_star)
-      for (let i = 0; i < this.formUpdate.images.length; i++) {
-        submit.data.append('images', this.formUpdate.images[i])
-      }
-      this.actionUpdateReview(submit)
-        .then((result) => {
-          console.log(result)
-          this.close()
-          this.actionGetALLReview()
-          this.$toast.success('Review Updated.', {
-            position: 'bottom'
+      if (!this.formUpdate.name || !this.formUpdate.review_comment) {
+        alert('name dan review harus diisi')
+      } else {
+        const submit = {
+          id: this.detailReview.data._id,
+          data: new FormData()
+        }
+        submit.data.append('name', this.formUpdate.name)
+        submit.data.append('review_comment', this.formUpdate.review_comment)
+        submit.data.append('review_star', this.formUpdate.review_star)
+        for (let i = 0; i < this.formUpdate.images.length; i++) {
+          submit.data.append('images', this.formUpdate.images[i])
+        }
+        this.actionUpdateReview(submit)
+          .then((result) => {
+            console.log(result)
+            this.close()
+            this.actionGetALLReview()
+            this.$toast.success('Review Updated.', {
+              position: 'bottom'
+            })
           })
-        })
-        .catch((err) => {
-          console.log(err)
-          this.$toast.error(`${err.message}`, {
-            position: 'bottom'
+          .catch((err) => {
+            console.log(err)
+            this.$toast.error(`${err.message}`, {
+              position: 'bottom'
+            })
           })
-        })
+      }
     },
     ...mapActions({
       actionUpdateReview: 'review/updateReview',
