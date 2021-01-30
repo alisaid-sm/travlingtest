@@ -16,6 +16,6 @@
 ```
 ## Demo
 
-- [Demo](https://nostalgic-thompson-a5568e.netlify.app/)
+[Link](https://nostalgic-thompson-a5568e.netlify.app/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/2dacc962-36d8-45f4-b512-0addc1ab0714/deploy-status)](https://app.netlify.com/sites/nostalgic-thompson-a5568e/deploys)
