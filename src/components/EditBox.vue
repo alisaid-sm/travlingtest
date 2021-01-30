@@ -142,7 +142,7 @@ export default {
 
 <style>
 #edit-box {
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
@@ -159,6 +159,7 @@ export default {
     width: 100%;
     height: 100vh;
     padding: 10px;
+    margin-top: 0px !important;
 }
 }
 .edit-container {

@@ -20,6 +20,9 @@
     position: relative;
 }
 @media (max-width: 415px) {
+    #app {
+        display: block;
+    }
     .app-container {
         width: 100%;
     }
