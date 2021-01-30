@@ -19,6 +19,13 @@ import 'vue-awesome/icons'
 
 import Icon from 'vue-awesome/components/Icon'
 
+import VueToast from 'vue-toast-notification'
+// Import one of the available themes
+// import 'vue-toast-notification/dist/theme-default.css';
+import 'vue-toast-notification/dist/theme-sugar.css'
+
+Vue.use(VueToast)
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin

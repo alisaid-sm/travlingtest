@@ -4,10 +4,10 @@
         <v-icon class="mt-5" name="spinner" scale="3" pulse></v-icon>
     </div>
     <div v-else class="card-review" v-for="(item, index) in allReview.data" :key="index">
-        <img @click="reviewMenu(index)" class="card-review-toggle" width="30px" draggable="false" src="../assets/img/three-dots-svgrepo-com.svg" alt="">
+        <img @click="reviewMenu(index, item._id)" class="card-review-toggle" width="30px" draggable="false" src="../assets/img/three-dots-svgrepo-com.svg" alt="">
         <div class="card-review-menu hide">
-            <a @click="editBox()">edit</a>
-            <a>delete</a>
+            <a @click="editBox(item._id)">edit</a>
+            <a @click="deleteReview(item._id)">delete</a>
         </div>
         <div class="card-review-img">
             <img src="../assets/img/default.jpg" width="45px" alt="">
@@ -39,6 +39,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      editData: null
     }
   },
   computed: {
@@ -47,13 +48,44 @@ export default {
     })
   },
   methods: {
-    reviewMenu (index) {
+    reviewMenu (index, id) {
       const element = document.getElementsByClassName('card-review-menu')
       element[index].classList.toggle('show')
+      this.actionGetDetailReview(id)
+        .then((result) => {
+          this.editData = result
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
-    editBox () {
+    editBox (id) {
       const element = document.getElementById('edit-box')
       element.classList.toggle('show')
+      if (this.editData == null) {
+        this.actionGetDetailReview(id)
+          .then((result) => {
+            this.editData = result
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    },
+    deleteReview (id) {
+      this.actionDeleteReview(id)
+        .then((result) => {
+          this.actionGetALLReview()
+          this.$toast.default('Review Deleted.', {
+            position: 'bottom'
+          })
+        })
+        .catch((err) => {
+          console.log(err.message)
+          this.$toast.error(`${err.message}`, {
+            position: 'bottom'
+          })
+        })
     },
     dateFormatIndo (date, update) {
       const dateSet = !update ? date : update
@@ -63,12 +95,13 @@ export default {
       return dateShort.join(' ')
     },
     ...mapActions({
-      actionGetALLReview: 'review/getAllReview'
+      actionGetALLReview: 'review/getAllReview',
+      actionDeleteReview: 'review/deleteReview',
+      actionGetDetailReview: 'review/getReviewById'
     })
   },
   mounted () {
     this.actionGetALLReview()
-    console.log(this.allReview)
   }
 }
 </script>

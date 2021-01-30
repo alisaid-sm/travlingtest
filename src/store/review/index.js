@@ -1,9 +1,16 @@
 import axios from 'axios'
 const API = process.env.VUE_APP_BASE_URL
+const config = {
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+}
 
 const state = () => {
   return {
     all: {
+      data: [],
+      isLoading: false
+    },
+    detail: {
       data: [],
       isLoading: false
     }
@@ -13,6 +20,9 @@ const state = () => {
 const getters = {
   getAllReview (state) {
     return state.all
+  },
+  getDetailReview (state) {
+    return state.detail
   }
 }
 
@@ -22,6 +32,9 @@ const mutations = {
   },
   SET_ALL_LOADING (state, payload) {
     state.all.isLoading = payload
+  },
+  SET_ALL_REVIEW_DETAIL (state, payload) {
+    state.detail.data = payload
   }
 }
 
@@ -43,23 +56,21 @@ const actions = {
     })
   },
   getReviewById (context, payload) {
-    context.commit('SET_ALL_LOADING', true)
     return new Promise((resolve, reject) => {
       axios.get(`${API}/review/${payload}`)
         .then((response) => {
+          context.commit('SET_ALL_REVIEW_DETAIL', response.data.data)
           resolve(response.data.data)
         })
         .catch((err) => {
           reject(err)
         })
-        .finally(() => {
-          context.commit('SET_ALL_LOADING', false)
-        })
     })
   },
   addReview (context, payload) {
+    console.log(payload)
     return new Promise((resolve, reject) => {
-      axios.post(`${API}/review`)
+      axios.post(`${API}/review`, payload, config)
         .then((response) => {
           resolve(response)
         })
@@ -81,7 +92,7 @@ const actions = {
   },
   deleteReview (context, payload) {
     return new Promise((resolve, reject) => {
-      axios.delete(`${API}/review/${payload.id}`)
+      axios.delete(`${API}/review/${payload}`)
         .then((response) => {
           resolve(response)
         })

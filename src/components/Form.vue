@@ -21,19 +21,20 @@
                     </div>
                 </div>
                 <div class="app-form-body">
-                    <form>
+                    <form @submit.prevent="addReview" ref="addReview" enctype='multipart/form-data'>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Tulis Nama Kamu">
+                            <input v-model="formAdd.name" type="text" class="form-control" placeholder="Tulis Nama Kamu">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Tulis Review Terbaik mu"></textarea>
+                            <textarea v-model="formAdd.review_comment" class="form-control" rows="3" placeholder="Tulis Review Terbaik mu"></textarea>
                         </div>
                         <div class="button-cont">
                             <label for="file-upload" class="app-btn bg-form-default mr-auto">
                                 Upload Gambar
                             </label>
-                            <input id="file-upload" type="file"/>
-                            <a type="submit" class="app-btn bg-form-default btn-right">Kirim</a>
+                            {{ formAdd.images.length == 1? formAdd.images[0].name : `${formAdd.images.length} files selected`}}
+                            <input @change="prosesFile" ref="fileAddReview" id="file-upload" type="file" multiple/>
+                            <button type="submit" class="app-btn bg-form-default btn-right">Kirim</button>
                         </div>
                     </form>
                 </div>
@@ -41,19 +42,67 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
       star: 0,
-      starfix: 0
+      starfix: 0,
+      formAdd: {
+        name: null,
+        review_comment: null,
+        review_star: 0,
+        images: []
+      }
     }
   },
   methods: {
+    ...mapActions({
+      actionAddReview: 'review/addReview',
+      actionGetALLReview: 'review/getAllReview'
+    }),
     styleStar (id) {
       this.star = id
     },
     reviewStar (id) {
       this.starfix = id
+      this.formAdd.review_star = id
+    },
+    prosesFile (event) {
+      this.formAdd.images = event.target.files
+    },
+    addReview (form) {
+      if (!this.formAdd.name || !this.formAdd.review_comment) {
+        alert('name dan comment harus diisi')
+      } else {
+        const fd = new FormData()
+        fd.append('name', this.formAdd.name)
+        fd.append('review_comment', this.formAdd.review_comment)
+        fd.append('review_star', this.formAdd.review_star)
+        for (let i = 0; i < this.formAdd.images.length; i++) {
+          fd.append('images', this.formAdd.images[i])
+        }
+        this.actionAddReview(fd)
+          .then((result) => {
+            console.log(result)
+            this.actionGetALLReview()
+            this.star = 0
+            this.starfix = 0
+            this.formAdd.name = null
+            this.formAdd.review_comment = null
+            this.formAdd.review_star = 0
+            this.formAdd.images = []
+            this.$toast.success('Review Saved.', {
+              position: 'bottom'
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+            this.$toast.error(`${err.message}`, {
+              position: 'bottom'
+            })
+          })
+      }
     }
   },
   mounted () {
