@@ -16,6 +16,6 @@
 ```
 ## Demo
 
-[Link](https://nostalgic-thompson-a5568e.netlify.app/)
+[Link](https://distracted-turing-64359a.netlify.app/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2dacc962-36d8-45f4-b512-0addc1ab0714/deploy-status)](https://app.netlify.com/sites/nostalgic-thompson-a5568e/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a823b43d-056e-4768-a714-c399e3464e07/deploy-status)](https://app.netlify.com/sites/distracted-turing-64359a/deploys)
